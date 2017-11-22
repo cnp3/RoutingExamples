@@ -182,4 +182,15 @@ exec { 'quagga':
               PATH=${quagga_path}/sbin:${quagga_path}/bin:\$PATH;",
 }
 
+# Quagga group
+
+group { 'quagga':
+	ensure => 'present',
+}
+user { 'ubuntu':
+	groups => 'quagga',
+}
+user { 'root':
+	groups => 'quagga',
+}
 
