@@ -12,13 +12,14 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  #config.vm.box = "SRv6"
   config.vm.box = "ubuntu/xenial32"
   config.vm.provision "shell", inline: <<-SHELL
     if ! which puppet; then
       apt-get update
       apt-get install -y puppet-common
     fi
+    # the xenial VM uses /home/ubuntu instead of the classical /home/vagrant
+    cd /home ; ln -s ubuntu vagrant
   SHELL
 
   config.vm.provision "puppet" do |puppet|

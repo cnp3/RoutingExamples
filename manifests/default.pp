@@ -6,13 +6,6 @@ $quagga_source_path = "${quagga_root_dir}/quagga-${quagga_version}"
 $quagga_download_path = "${quagga_source_path}.tar.gz"
 $quagga_path = "/home/ubuntu/quagga"
 
-$jansson_version = "2.10"
-$jansson_release_url = "http://www.digip.org/jansson/releases/jansson-${jansson_version}.tar.gz"
-$jansson_root_dir = "/home/ubuntu"
-$jansson_source_path = "${jansson_root_dir}/jansson-${jansson_version}"
-$jansson_download_path = "${jansson_source_path}.tar.gz"
-$jansson_path = "/usr/local/lib/libjansson.a"
-
 # Remove useless warnings
 Package { allow_virtual => true }
 
@@ -73,6 +66,11 @@ package { 'bridge-utils':
 }
 package { 'mininet':
   require => Exec['apt-update'],
+  ensure => installed,
+}
+package { 'ipmininet':
+  provider => "pip", 
+  require => [Package['mininet'],Package['mako'], Package['py2-ipaddress']],
   ensure => installed,
 }
 
@@ -185,18 +183,3 @@ exec { 'quagga':
 }
 
 
-exec { 'jansson-download':
-  require => [ Exec['apt-update'] ],
-  creates => $jansson_source_path,
-  command => "wget -O - ${jansson_release_url} > ${jansson_download_path} &&\
-              tar -xvzf ${jansson_download_path} -C ${jansson_root_dir};"
-}
-exec { 'jansson':
-  require => [ Exec['apt-update'], Exec['jansson-download'] ] + $compilation,
-  cwd => $jansson_source_path,
-  creates => $jansson_path,
-  path => "${default_path}:${jansson_source_path}",
-  command => "configure &&\
-              make &&\
-              make install;"
-}
