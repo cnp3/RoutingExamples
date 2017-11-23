@@ -10,7 +10,7 @@ from ipmininet.router.config.zebra import StaticRoute, Zebra
 from ipmininet.router.config.base import RouterConfig
 from ipmininet.iptopo import IPTopo
 
-from mininet.log import lg, logging
+from mininet.log import lg
 
 """
 
@@ -56,8 +56,7 @@ class SimpleTopo(IPTopo):
         return self.addRouter(name, use_v4=False, use_v6=True, config=(RouterConfig, {'daemons': [(Zebra, {"static_routes": staticRoutes})]}))
 
 ipmininet.DEBUG_FLAG = True
-# Make sure that zebra is available on the system PATH
-os.environ["PATH"] += os.pathsep + "/home/vagrant/quagga/bin" + os.pathsep + "/home/vagrant/quagga/sbin"
+lg.setLogLevel("info")
 
 # Start network
 net = IPNet(topo=SimpleTopo(), use_v4=False, allocate_IPs=False)
