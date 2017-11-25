@@ -48,6 +48,11 @@ package { 'wireshark':
   require => Exec['apt-update'],
   ensure => installed,
 }
+package {'tshark':
+  require => Exec['apt-update'],
+  ensure => installed,
+}
+
 package { 'radvd':
   require => Exec['apt-update'],
   ensure => installed,
