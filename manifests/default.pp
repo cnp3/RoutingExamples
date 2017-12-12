@@ -1,5 +1,5 @@
 # Mathieu Jadin, manifest to create Ubuntu VM with ipminet and routing daemons
-$quagga_version = "1.2.1"
+$quagga_version = "1.2.2"
 $quagga_release_url = "http://download.savannah.gnu.org/releases/quagga/quagga-${quagga_version}.tar.gz"
 $quagga_root_dir = "/home/ubuntu"
 $quagga_source_path = "${quagga_root_dir}/quagga-${quagga_version}"
