@@ -175,7 +175,8 @@ exec { 'quagga':
   cwd => $quagga_source_path,
   creates => $quagga_path,
   path => "${default_path}:${quagga_source_path}",
-  command => "configure --prefix=${quagga_path} &&\
+  command => "git apply /vagrant/patch_bgpd_quagga.patch &&\
+              configure --prefix=${quagga_path} &&\
               make &&\
               make install &&\
               rm ${quagga_download_path} &&\
