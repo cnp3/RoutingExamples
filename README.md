@@ -6,4 +6,5 @@ IPv6 routing examples that use [IPMininet](https://github.com/oliviertilmans/ipm
  - [Observing IPv6 link local addresses](https://obonaventure.github.io/cnp3blog/ipv6-fe80/)
  - [Exploring static routing with IPMininet](https://obonaventure.github.io/cnp3blog/ipmininet-static/)
  - [Exploring OSPFv3 routing with IPMininet](https://obonaventure.github.io/cnp3blog/ipmininet-ospfv3/)
- 
+ - [Exploring BGP with IPMininet](https://obonaventure.github.io/cnp3blog/bgp/)
+ - [Fixing incorrect IPv6 routing tables](https://obonaventure.github.io/cnp3blog/static2/)
