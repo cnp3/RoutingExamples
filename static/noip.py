@@ -30,6 +30,7 @@ class NoIP(IPTopo):
         h2 = self.addHost('h2')
         self.addLink(r, h1)
         self.addLink(r, h2)
+        super(NoIP, self).build(*args, **kwargs)
 
 
     def addRouter_v6(self, name, **kwargs):
