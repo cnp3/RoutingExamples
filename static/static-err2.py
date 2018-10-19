@@ -1,16 +1,11 @@
-import argparse
-import json
-import os
-from mininet.log import LEVELS, lg
+from mininet.log import lg
 
 import ipmininet
 from ipmininet.cli import IPCLI
 from ipmininet.ipnet import IPNet
-from ipmininet.router.config.zebra import StaticRoute, Zebra
-from ipmininet.router.config.base import RouterConfig
 from ipmininet.iptopo import IPTopo
-
-from mininet.log import lg, logging
+from ipmininet.router.config.base import RouterConfig
+from ipmininet.router.config.zebra import StaticRoute, Zebra
 
 """This file contains a simple network topology"""
 
@@ -71,13 +66,13 @@ class SimpleTopo(IPTopo):
         self.addLink(re, self.addHost('h2'),
                      params1={"ip": "2001:2345:2::e/64"},
                      params2={"ip": "2001:2345:2::2/64"})
+        super(SimpleTopo, self).build(*args, **kwargs)
 
     def addRouter_v6(self, name, staticRoutes):
         return self.addRouter(name, use_v4=False, use_v6=True, config=(RouterConfig, {'daemons': [(Zebra, {"static_routes": staticRoutes})]}))
 
 ipmininet.DEBUG_FLAG = True
-
-os.environ["PATH"] += os.pathsep + "/home/vagrant/quagga/bin" + os.pathsep + "/home/vagrant/quagga/sbin"
+lg.setLogLevel("info")
 
 # Start network
 net = IPNet(topo=SimpleTopo(), use_v4=False, allocate_IPs=False)

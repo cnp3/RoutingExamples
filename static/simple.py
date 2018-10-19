@@ -1,16 +1,11 @@
-import argparse
-import json
-import os
-from mininet.log import LEVELS, lg
+from mininet.log import lg
 
 import ipmininet
 from ipmininet.cli import IPCLI
 from ipmininet.ipnet import IPNet
-from ipmininet.router.config.zebra import StaticRoute, Zebra
-from ipmininet.router.config.base import RouterConfig
 from ipmininet.iptopo import IPTopo
-
-from mininet.log import lg
+from ipmininet.router.config.base import RouterConfig
+from ipmininet.router.config.zebra import StaticRoute, Zebra
 
 """
 
@@ -51,6 +46,7 @@ class SimpleTopo(IPTopo):
         self.addLink(r3, self.addHost('c'),
                      params1={"ip": "2001:7ab:3::1/64"},
                      params2={"ip": "2001:7ab:3::c/64"})
+        super(SimpleTopo, self).build(*args, **kwargs)
 
     def addRouter_v6(self, name, staticRoutes):
         return self.addRouter(name, use_v4=False, use_v6=True, config=(RouterConfig, {'daemons': [(Zebra, {"static_routes": staticRoutes})]}))
